@@ -21,7 +21,7 @@ public class Lesson03 {
 
     String guessWord(){
         Random ranGen = new Random();
-        String guessWord=wordList[ranGen.nextInt(wordList.length-1)];
+        String guessWord=wordList[ranGen.nextInt(wordList.length)];
         //System.out.println("Guessed word is "+ guessWord);
         return guessWord;
     }
