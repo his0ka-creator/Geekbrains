@@ -17,6 +17,7 @@ public class Lesson06 {
         d2.run(-3);
         System.out.println("Всего было создано кошек: "+Cat.catCount);
         System.out.println("Всего было создано собак: "+Dog.dogCount);
+        System.out.println("Всего было создано животных: " + Animal.count);
     }
 }
 
