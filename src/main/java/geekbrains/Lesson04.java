@@ -1,6 +1,5 @@
 package geekbrains;
 
-import java.util.Locale;
 import java.util.Scanner;
 import java.util.Random;
 
@@ -29,7 +28,7 @@ public class Lesson04 {
                 System.out.println("Check empty spots");
                 if (!isThereEmptySpot(object.field)) break;
                 System.out.println("AI move");
-                object.AIMove();
+                object.aiMoveForNImproved(counter, object.field);
                 object.printField(object.field);
                 if (object.checkWinforN(counter, object.field, AI_CHAR)) System.out.println("Sorry, pal! AI won!");
                 if (!isThereEmptySpot(object.field)) break;
@@ -45,7 +44,7 @@ public class Lesson04 {
     private static boolean isThereEmptySpot(char[][] field) {
         for (int i = 0; i < FIELD_SIZE_Y; i++) {
             for (int j = 0; j < FIELD_SIZE_X; j++) {
-                if (field[i][j] == '*') {
+                if (field[i][j] == DEFAULT_CHAR) {
                     //System.out.println("There is no empty spot");
                     return true;
                 }
@@ -58,7 +57,7 @@ public class Lesson04 {
         while (true){
             int x=RANDOM_GEN.nextInt(FIELD_SIZE_X);
             int y=RANDOM_GEN.nextInt(FIELD_SIZE_Y);
-            if (field[x][y]=='*'){field[x][y]='0'; break;}
+            if (field[x][y]==DEFAULT_CHAR){field[x][y]='0'; break;}
         }
 
     }
@@ -78,7 +77,7 @@ public class Lesson04 {
     void initArray(char[][] field) {
         for (int i = 0; i < FIELD_SIZE_Y; i++) {
             for (int j = 0; j < FIELD_SIZE_X; j++) {
-                field[i][j] = '*';
+                field[i][j] = DEFAULT_CHAR;
             }
         }
     }
@@ -237,8 +236,35 @@ public class Lesson04 {
         return false;
     };
 
-}
+    void copyArray(char[][] a1, char[][] a2){
+        for (int i = 0; i < a1.length; i++) {
+            for (int j = 0; j < a1[i].length; j++) {
+                a2[i][j]=a1[1][j];
+            }
+        }
+    }
+    // данный алгоритм будет использовать checkWinforN для опеределения выигрышного хода и блокировать его
+    // для начала буду использовать одинарную вложенность
+    void aiMoveForNImproved(int counter, char[][] field){
+        //вспомогательная копия массива
 
+        for (int i = 0; i < FIELD_SIZE_Y; i++) {
+            for (int j = 0; j < FIELD_SIZE_X;j++) {
+                //copyArray(field,fieldModel);
+                if (field[i][j]==DEFAULT_CHAR){
+                    field[i][j]=HUMAN_CHAR;
+                    if (checkWinforN(counter, field, HUMAN_CHAR)) {field[i][j]=AI_CHAR; return;}
+                    else {
+                       field[i][j]=DEFAULT_CHAR;
+                    }
+                }
+            }
+
+        }
+
+        AIMove();
+    }
+}
 
 
 
