@@ -20,10 +20,10 @@ public class Lesson05 {
 }
 
 class Employee {
-    String fullName;
-    String position;
-    String eMail;
-    String phoneNumber;
+    private String fullName;
+    private String position;
+    private String eMail;
+    private String phoneNumber;
     int salary;
     int age;
 
@@ -37,7 +37,7 @@ class Employee {
     }
 
     public void printInfo (){
-        String output = "Full name is: " + fullName +
+         String output = "Full name is: " + fullName +
                 "\nPosition is: " + position +
                 "\nEmail is: " + eMail +
                 "\nPhone number is: " + phoneNumber +
