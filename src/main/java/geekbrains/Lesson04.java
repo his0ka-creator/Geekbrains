@@ -1,5 +1,6 @@
 package geekbrains;
 
+import java.lang.reflect.Field;
 import java.util.Scanner;
 import java.util.Random;
 
@@ -68,6 +69,7 @@ public class Lesson04 {
             int x = SCANNER.nextInt() - 1;
             int y = SCANNER.nextInt() - 1;
             if (!(x >= 0 && x < FIELD_SIZE_X && y >= 0 && y < FIELD_SIZE_Y)) continue;
+            if (!(field[x][y]==DEFAULT_CHAR)) continue;
             this.field[x][y] = HUMAN_CHAR;
             return;
         }
@@ -236,18 +238,40 @@ public class Lesson04 {
         return false;
     };
 
-    void copyArray(char[][] a1, char[][] a2){
-        for (int i = 0; i < a1.length; i++) {
-            for (int j = 0; j < a1[i].length; j++) {
-                a2[i][j]=a1[1][j];
+
+    //вспомогательный метод инициализации fieldModel
+    void copyArray(char[][] sourceArr, char[][] destArr){
+        for (int i = 0; i < sourceArr.length; i++) {
+            for (int j = 0; j < sourceArr[i].length; j++) {
+                destArr[i][j]=sourceArr[i][j];
             }
         }
     }
     // данный алгоритм будет использовать checkWinforN для опеределения выигрышного хода и блокировать его
     // для начала буду использовать одинарную вложенность
+
+
+    //метод, который проверяет может ли на следующем ходе победить игрок
+    boolean checkMove(char[][] fieldModel, char someOnesDot){
+        for (int i = 0; i < fieldModel.length; i++) {
+            for (int j = 0; j < fieldModel[i].length; j++) {
+                if (fieldModel[i][j]==DEFAULT_CHAR){
+                    fieldModel[i][j]=someOnesDot;
+                    if (checkWinforN(counter, fieldModel,someOnesDot))  return true;
+                    else {
+                        fieldModel[i][j]=DEFAULT_CHAR;
+                    }
+                }
+            }
+
+        }
+        return false;
+    }
+
     void aiMoveForNImproved(int counter, char[][] field){
         //вспомогательная копия массива
 
+        //ищем есть ли ход, которым игрок победит на этом ходу. Если есть, то блокируем его
         for (int i = 0; i < FIELD_SIZE_Y; i++) {
             for (int j = 0; j < FIELD_SIZE_X;j++) {
                 //copyArray(field,fieldModel);
@@ -262,6 +286,24 @@ public class Lesson04 {
 
         }
 
+        //ищем есть ли последовательность из двух ходов, которой игрок победит на следующем ходу. Если есть - блокируем на этом.
+
+        //вспомогательный массив
+        char[][] fieldModel = new char[FIELD_SIZE_Y][FIELD_SIZE_X];
+        for (int i = 0; i < FIELD_SIZE_Y; i++) {
+            for (int j = 0; j < FIELD_SIZE_X; j++) {
+                if (field[i][j]==DEFAULT_CHAR){
+                    field[i][j]=HUMAN_CHAR;
+                    copyArray(field,fieldModel);
+                    if (checkMove(fieldModel,HUMAN_CHAR)) {field[i][j]=AI_CHAR; return;}
+                    else {
+                        field[i][j]=DEFAULT_CHAR;
+                    }
+                }
+
+            }
+
+        }
         AIMove();
     }
 }
