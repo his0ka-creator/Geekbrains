@@ -6,7 +6,7 @@ public class Main {
     public static void main(String[] args){
         Cat[] catArr = {
                 new Cat("Barsik", 135),
-                new Cat("Murilka", 328),
+                new Cat("Murzilka", 328),
                 new Cat("Albert", 473),
                 new Cat("Murka", 757) };
         ArrayList<Cat> stillHungryCats = new ArrayList<Cat>(catArr.length);
