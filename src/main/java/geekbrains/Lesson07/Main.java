@@ -28,7 +28,6 @@ public class Main {
             }
         }
 
-        catBowl.info();
 
         int requiredFoodAmount = 0;
         for (Cat c: catArr){
