@@ -37,7 +37,7 @@ public class Cat {
             System.out.printf("There is not enough food for %s in this bowl... Maybe you can add some?\n", name);
         }
         else {
-            bowl.deacreaseFoodAmount(appetite);
+            bowl.decreaseFoodAmount(appetite);
             this.setIsBellyful(true);
             System.out.printf("%s has eaten.\n", name);
         }

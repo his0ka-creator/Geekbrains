@@ -19,7 +19,7 @@ public class Bowl {
         currentFoodVolume+=foodAmount;
     }
 
-    public void deacreaseFoodAmount(int foodAmount){
+    public void decreaseFoodAmount(int foodAmount){
         currentFoodVolume-=foodAmount;
     }
 }
