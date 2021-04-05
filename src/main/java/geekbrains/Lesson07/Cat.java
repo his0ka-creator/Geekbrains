@@ -31,14 +31,15 @@ public class Cat {
         this.isBellyful=state;
     }
 
+
     public void eat(Bowl bowl){
         if (appetite > bowl.getCurrentFoodVolume()){
             System.out.printf("There is not enough food for %s in this bowl... Maybe you can add some?\n", name);
         }
         else {
-            bowl.setCurrentFoodVolume(bowl.getCurrentFoodVolume() - appetite);
+            bowl.deacreaseFoodAmount(appetite);
             this.setIsBellyful(true);
-            System.out.printf("%s has eaten and now went to sleep :-)\n", name);
+            System.out.printf("%s has eaten.\n", name);
         }
     }
 }

@@ -11,11 +11,15 @@ public class Bowl {
         return currentFoodVolume;
     }
 
-    public void setCurrentFoodVolume(int foodVolume){
-        currentFoodVolume=foodVolume;
+    public void info(){
+        System.out.printf("Current food amount in the bowl is %s\n", currentFoodVolume);
     }
 
-    public void addFoodAmount(int foodAmount){
-        setCurrentFoodVolume(getCurrentFoodVolume()+foodAmount);
+    public void increaseFoodAmount(int foodAmount){
+        currentFoodVolume+=foodAmount;
+    }
+
+    public void deacreaseFoodAmount(int foodAmount){
+        currentFoodVolume-=foodAmount;
     }
 }

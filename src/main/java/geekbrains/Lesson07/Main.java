@@ -11,9 +11,14 @@ public class Main {
                 new Cat("Murka", 757) };
         ArrayList<Cat> stillHungryCats = new ArrayList<Cat>(catArr.length);
         Bowl catBowl = new Bowl(300);
+
+        catBowl.info();
+
         for (Cat c: catArr){
             c.eat(catBowl);
         }
+
+        catBowl.info();
 
         for (Cat c: catArr){
             if (c.getIsBellyful()) System.out.printf("%s is bellyful\n",c.getName());
@@ -23,20 +28,22 @@ public class Main {
             }
         }
 
+        catBowl.info();
+
         int requiredFoodAmount = 0;
         for (Cat c: catArr){
             if (!c.getIsBellyful()) requiredFoodAmount+=c.getAppetite();
         }
 
-        catBowl.addFoodAmount(requiredFoodAmount);
+        catBowl.increaseFoodAmount(requiredFoodAmount-catBowl.getCurrentFoodVolume());
 
-        for(Cat c: catArr){
+        for(Cat c: stillHungryCats){
             c.eat(catBowl);
         }
 
         for(Cat c: stillHungryCats){
-            System.out.printf("%s is bellyful at last!\n",c.getName());
+            if (c.getIsBellyful()) System.out.printf("%s is bellyful at last!\n",c.getName());
         }
-
+        catBowl.info();
     }
 }
