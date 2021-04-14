@@ -17,12 +17,15 @@ class MainWindow extends JFrame {
 
         protected GameMap map;
 
+
+
         MainWindow(){
             setSize(WINDOW_WIDTH,WINDOW_HEIGHT);
             setVisible(true);
             setDefaultCloseOperation(EXIT_ON_CLOSE);
             setLocation((DISPLAY_WIDTH-WINDOW_WIDTH)/2,(DISPLAY_HEIGHT-WINDOW_HEIGHT)/2);
             setTitle("Tic Tac Toe");
+            setResizable(false);
 
             setLayout(new BorderLayout());
             JButton button1=new JButton("SETTINGS");
@@ -32,6 +35,8 @@ class MainWindow extends JFrame {
             panel.add(button2);
             panel.setLayout(new GridLayout(1,2));
             add(panel,BorderLayout.SOUTH);
+
+            SettingsWindow settings = new SettingsWindow(this);
             button2.addActionListener(new ActionListener() {
                 @Override
                 public void actionPerformed(ActionEvent e) {
@@ -41,9 +46,19 @@ class MainWindow extends JFrame {
             button1.addActionListener(new ActionListener() {
                 @Override
                 public void actionPerformed(ActionEvent e) {
-                    new SettingsWindow();
-                }
+                    settings.setVisible(true);
+                    }
             });
 
+
+
         }
-    }
+
+
+
+    public void startGame(int setGameMode, int setFieldSize, int setWinLength) {
+        map = new GameMap();
+        map.startGame(setGameMode,setFieldSize,setWinLength);
+
+        }
+}
